@@ -1,17 +1,29 @@
-%This is to averaging time frames.
-clear
-fdir='file directory';
-fname='file name';
+% This script averages image frames over a specified time window
+% Clear workspace
+clear;
 
-%define below
-totalframenumb=50; % total 
-timewindow=3; %number of time frame for averaging 
-interval = 1.7; % time-lapse interval
-l=0.; h=l+4;%3.5; % low/high level range to assign colors.
-%%
+%% ====== User-defined settings ======
+fdir = 'file directory';    % Path to the folder containing your images
+fname = 'file name';        % Base name of your image file(s)
+
+totalframenumb = 50;        % Total number of frames to use
+timewindow = 3;             % Number of frames for averaging
+                             % Example: 3 means averaging previous (-1), current (0), and next (+1) frames
+interval = 1.7;             % Time-lapse interval between frames (e.g., seconds)
+
+l = 0;                      % Low intensity level for display/adjustment
+h = l + 4;                  % High intensity level for display/adjustment
+gamma = 1;                   % Gamma correction (non-linear intensity adjustment, 1 = no change)
+
+%% ====== Notes ======
+% - Make sure fdir points to the correct folder
+% - Ensure fname matches your file naming pattern
+% - Adjust 'totalframenumb' to the number of frames you actually have
+% - 'timewindow' should be an odd number for symmetric averaging around current frame
+
 images = cell(totalframenumb,1); 
 for i=1:totalframenumb %i=10
-    I00{i}=double(imread([fdir fname '.tif'],i )).^0.85;
+    I00{i}=double(imread([fdir fname '.tif'],i )).^gamma;
    % I0{i}=imgaussfilt(I00{i});
 end
 
