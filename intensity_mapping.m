@@ -1,6 +1,6 @@
 % This script averages image frames over a specified time window
 % Clear workspace
-clear;
+clear;;
 
 %% ====== User-defined settings ======
 fdir = 'file directory';    % Path to the folder containing your images
